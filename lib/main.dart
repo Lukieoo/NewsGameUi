@@ -1,75 +1,160 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Flutter Demo',
+        title: 'News App',
         theme: ThemeData(
           primarySwatch: Colors.blue,
+          brightness: Brightness.light, // default value
         ),
-        home: Container(
-          decoration: new BoxDecoration(
-              image: new DecorationImage(
+        home: HomePage());
+  }
+}
+
+class HomePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+
+    return Theme(
+      data: Theme.of(context).copyWith(
+        // override textfield's icon color when selected
+        primaryColor: Colors.white,
+      ),
+      child: Container(
+        decoration: new BoxDecoration(
+            image: new DecorationImage(
                 image: AssetImage('assets/summers.jpg'),
 //                  image: new NetworkImage(
 //                      "https://r1.ilikewallpaper.net/pic/201612/papers_co_nj89_city_view_mountain_nature_sunny_summer_33_iphone6_wallpaper_1_640.jpg"),
 
-                  fit: BoxFit.cover)),
-          child: Padding(
-            padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-            child: Scaffold(
-              backgroundColor: Colors.transparent,
+                fit: BoxFit.cover)),
+        child: Padding(
+          padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+          child: Scaffold(
+            backgroundColor: Colors.transparent,
+            body: CustomScrollView(
+              slivers: <Widget>[
+                SliverAppBar(
+                  backgroundColor: Colors.transparent,
+                  expandedHeight: 200.0,
 
-              body: CustomScrollView(
-                slivers: <Widget>[
-                  SliverAppBar(
-                    backgroundColor: Colors.transparent,
-                    expandedHeight: 200.0,
-                    pinned: false,
-                    floating: false,
-//                    flexibleSpace: FlexibleSpaceBar(
-//                      collapseMode:  CollapseMode.parallax,
-//                        title: Container(),
-//                      background: Image.network(
-//                        "https://lh3.googleusercontent.com/proxy/8csMi78_4469NzQjzaV-8wxpiMFDd2VSRbdYjGhu9Yse7zdX4i3Tuyd6f1HR_CTIrYuaVxE5Cvr4cSDbNlHlUE7BqzMIa4GvK1K7CS7FJh0AJCiC3FzlxbOmNm1_sG6U7JbxAvW_NnYL6GYHYFwCZw",
-//                        fit: BoxFit.cover)
-//                    ),
-                    actions: <Widget>[],
+                  pinned: false,
+                  floating: false,
+                  flexibleSpace: FlexibleSpaceBar(
+                    centerTitle: false,
+                    titlePadding: EdgeInsets.all(0.0),
+                    title: Stack(
+                        overflow: Overflow.visible,
+                        alignment: Alignment.bottomLeft,
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 95.0),
+                            child: Text("Today",
+                                softWrap: true,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                  fontSize: 25.0,
+                                  fontFamily: "Calibre-Semibold",
+                                  letterSpacing: 1.5,
+                                )),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 80.0),
+                            child: Text('Good morning!',
+                                softWrap: true,
+                                style: new TextStyle(
+                                    fontWeight: FontWeight.normal,
+                                    fontSize: 10.0,
+                                    color: Colors.white)),
+                          ),
+                          Padding(
+                              padding: const EdgeInsets.only(bottom: 50.0),
+                              child: Opacity(
+                               opacity: 0.7,
+                                child: Container(
+                                  height: 25,
+                                  width: size.width - 150,
+                                  decoration: new BoxDecoration(
+                                      color: Colors.grey[400],
+                                      borderRadius:
+                                          new BorderRadius.circular(25.0)),
+                                  child: TextField(
+                                      cursorColor: Colors.white,
+                                      style: TextStyle(
+                                        fontSize: 10.0,
+                                        color: Colors.white,
+                                      ),
+                                      decoration: InputDecoration(
+                                          border: InputBorder.none,
+                                          contentPadding: EdgeInsets.only(
+                                              left: 15,
+                                              bottom: 10,
+                                              top: 10,
+                                              right: 10),
+                                          hintStyle: TextStyle(
+                                              fontFamily: "Calibre-Semibold",
+                                              fontSize: 8,
+                                              color: Colors.white),
+                                          prefixIcon: Icon(
+                                            Icons.search,
+                                            color: Colors.white,
+                                            size: 15,
+                                          ),
+                                          hintText: "Search your news",
+                                          focusedBorder: OutlineInputBorder(
+                                              borderSide: BorderSide.none,
+                                              borderRadius:
+                                                  BorderRadius.circular(25.0)))),
+                                ),
+                              )),
+                        ]),
                   ),
-                  SliverToBoxAdapter( child: Container(
+                  actions: <Widget>[],
+                ),
+                SliverToBoxAdapter(
+                  child: Container(
                     height: 20,
                     decoration: BoxDecoration(
-                      borderRadius:BorderRadius.only(topLeft:Radius.circular(20),topRight:Radius.circular(20)  ) ,
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(20),
+                          topRight: Radius.circular(20)),
                       color: Colors.white.withOpacity(0.8),
                     ),
-                  ),),
-                  SliverList(
-                    ///Use SliverChildListDelegate and provide a list
-                    ///of widgets if the count is limited
-                    ///
-                    ///Lazy building of list
-                    delegate: SliverChildBuilderDelegate(
-                      (BuildContext context, int index) {
-                        /// To convert this infinite list to a list with "n" no of items,
-                        /// uncomment the following line:
-                        /// if (index > n) return null;
-                        return listItem("Sliver List item: $index");
-                      },
+                  ),
+                ),
+                SliverList(
+                  ///Use SliverChildListDelegate and provide a list
+                  ///of widgets if the count is limited
+                  ///
+                  ///Lazy building of list
+                  delegate: SliverChildBuilderDelegate(
+                    (BuildContext context, int index) {
+                      /// To convert this infinite list to a list with "n" no of items,
+                      /// uncomment the following line:
+                      /// if (index > n) return null;
+                      return listItem("Sliver List item: $index");
+                    },
 
-                      /// Set childCount to limit no.of items
-                      /// childCount: 100,
-                    ),
-                  )
-                ],
-              ),
+                    /// Set childCount to limit no.of items
+                    /// childCount: 100,
+                  ),
+                )
+              ],
             ),
           ),
-        ));
+        ),
+      ),
+    );
   }
 }
 
