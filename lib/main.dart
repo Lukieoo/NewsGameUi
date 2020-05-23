@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
+import 'NewsModel.dart';
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -10,9 +12,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'News App',
+        title: 'Game  newsletter',
         theme: ThemeData(
-          primarySwatch: Colors.blue,
+          primarySwatch: Colors.grey,
           brightness: Brightness.light, // default value
         ),
         home: HomePage());
@@ -22,6 +24,12 @@ class MyApp extends StatelessWidget {
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+
+    List <News>news=[
+      News("God Of War 5 Trailer This Year? New Rumors & News (New God Of War PS5)","assets/image/image1.jpg"),
+      News("Assassin's Creed 2020 Impacted By Recent News & New Rumor (Assassin's Creed Ragnarok)","assets/image/image2.png"),
+      News("Cyberpunk 2077 News - Drunk Driving, Crucifixion, Genital Customization & Night City Wire Event!","assets/image/image3.jpg"),
+      ];
     final size = MediaQuery.of(context).size;
 
     return Theme(
@@ -32,10 +40,11 @@ class HomePage extends StatelessWidget {
       child: Container(
         decoration: new BoxDecoration(
             image: new DecorationImage(
-                image: AssetImage('assets/summers.jpg'),
+                image: AssetImage('assets/image/dark.png' ),
+alignment: Alignment(0,10.0),
 //                  image: new NetworkImage(
 //                      "https://r1.ilikewallpaper.net/pic/201612/papers_co_nj89_city_view_mountain_nature_sunny_summer_33_iphone6_wallpaper_1_640.jpg"),
-
+              //  colorFilter: ColorFilter.mode(Colors.deepOrangeAccent, BlendMode.darken),
                 fit: BoxFit.cover)),
         child: Padding(
           padding: const EdgeInsets.only(left: 8.0, right: 8.0),
@@ -45,8 +54,7 @@ class HomePage extends StatelessWidget {
               slivers: <Widget>[
                 SliverAppBar(
                   backgroundColor: Colors.transparent,
-                  expandedHeight: 200.0,
-
+                  expandedHeight: 220.0,
                   pinned: false,
                   floating: false,
                   flexibleSpace: FlexibleSpaceBar(
@@ -57,8 +65,8 @@ class HomePage extends StatelessWidget {
                         alignment: Alignment.bottomLeft,
                         children: <Widget>[
                           Padding(
-                            padding: const EdgeInsets.only(bottom: 95.0),
-                            child: Text("Today",
+                            padding: const EdgeInsets.only(bottom: 90.0),
+                            child: Text("Game news",
                                 softWrap: true,
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
@@ -69,52 +77,58 @@ class HomePage extends StatelessWidget {
                                 )),
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(bottom: 80.0),
-                            child: Text('Good morning!',
+                            padding: const EdgeInsets.only(bottom: 70.0),
+                            child: Text('Find  newsletter',
                                 softWrap: true,
                                 style: new TextStyle(
                                     fontWeight: FontWeight.normal,
                                     fontSize: 10.0,
                                     color: Colors.white)),
                           ),
+                          Positioned(
+                            bottom: 70,
+                            right: 0,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  color: Colors.blue.withOpacity(0.3),
+                                  borderRadius: BorderRadius.circular(20)),
+                              child: Padding(
+                                padding: const EdgeInsets.all(4.0),
+                                child: Image.asset("assets/icon/icon1.png",height: 22,),
+                              )
+                              ,),
+                          ),
                           Padding(
-                              padding: const EdgeInsets.only(bottom: 50.0),
+                              padding: const EdgeInsets.only(bottom: 20.0),
                               child: Opacity(
-                               opacity: 0.7,
+                                opacity: 0.7,
                                 child: Container(
-                                  height: 25,
-                                  width: size.width - 150,
-                                  decoration: new BoxDecoration(
-                                      color: Colors.grey[400],
-                                      borderRadius:
-                                          new BorderRadius.circular(25.0)),
-                                  child: TextField(
-                                      cursorColor: Colors.white,
-                                      style: TextStyle(
-                                        fontSize: 10.0,
-                                        color: Colors.white,
+                                  height: 30,
+                                  child: TextFormField(
+                                    style: TextStyle(fontSize: 10,color: Colors.white),
+                                    keyboardType: TextInputType.text,
+                                    decoration: InputDecoration(
+                                      prefixIcon: Icon(
+                                        Icons.search,
+                                        size: 15,
+                                          color: Colors.white
                                       ),
-                                      decoration: InputDecoration(
-                                          border: InputBorder.none,
-                                          contentPadding: EdgeInsets.only(
-                                              left: 15,
-                                              bottom: 10,
-                                              top: 10,
-                                              right: 10),
-                                          hintStyle: TextStyle(
-                                              fontFamily: "Calibre-Semibold",
-                                              fontSize: 8,
-                                              color: Colors.white),
-                                          prefixIcon: Icon(
-                                            Icons.search,
-                                            color: Colors.white,
-                                            size: 15,
-                                          ),
-                                          hintText: "Search your news",
-                                          focusedBorder: OutlineInputBorder(
-                                              borderSide: BorderSide.none,
-                                              borderRadius:
-                                                  BorderRadius.circular(25.0)))),
+
+                                      hintText: 'Search for games',
+                                      hintStyle: TextStyle(
+                                          fontSize: 10, color: Colors.white),
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(25),
+                                        borderSide: BorderSide(
+                                          width: 0,
+                                          style: BorderStyle.none,
+                                        ),
+                                      ),
+                                      filled: true,
+                                      contentPadding: EdgeInsets.all(0),
+                                      fillColor: Colors.grey.withOpacity(0.8),
+                                    ),
+                                  ),
                                 ),
                               )),
                         ]),
@@ -123,7 +137,7 @@ class HomePage extends StatelessWidget {
                 ),
                 SliverToBoxAdapter(
                   child: Container(
-                    height: 20,
+                    height: 40,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(20),
@@ -141,13 +155,15 @@ class HomePage extends StatelessWidget {
                     (BuildContext context, int index) {
                       /// To convert this infinite list to a list with "n" no of items,
                       /// uncomment the following line:
-                      /// if (index > n) return null;
-                      return listItem("Sliver List item: $index");
+                       if (index > news.length-1) return null;
+                      ///
+                      return listItem(news.elementAt(index).info,news.elementAt(index).image,context);
                     },
 
                     /// Set childCount to limit no.of items
-                    /// childCount: 100,
+                     childCount: 10,
                   ),
+
                 )
               ],
             ),
@@ -158,20 +174,39 @@ class HomePage extends StatelessWidget {
   }
 }
 
-Widget listItem(String title) => Container(
-      height: 100.0,
+Widget listItem(String title,String image,var context) => Container(
+
       color: Colors.white.withOpacity(0.8),
-      child: Center(
-        child: Text(
-          "$title",
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            color: Colors.black,
-            fontSize: 14.0,
-            fontWeight: FontWeight.bold,
-          ),
+
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+
+            Padding(
+
+              padding: const EdgeInsets.all(20.0),
+              child: Text(
+
+                "$title",
+                textAlign: TextAlign.start,
+                style: TextStyle(
+
+                  color: Colors.black,
+                  fontSize: 14.0,
+                  fontWeight: FontWeight.bold,
+                ),
+
+              ),
+            ),
+            Container(
+              height: 200,
+              width: MediaQuery.of(context).size.width-40,
+              decoration: BoxDecoration( borderRadius: BorderRadius.circular(2)),
+              child: Image.asset(image ,fit: BoxFit.cover,alignment: Alignment(0.0, 0),),
+            )
+          ],
         ),
-      ),
+
     );
 //class MyHomePage extends StatefulWidget {
 //  MyHomePage({Key key, this.title}) : super(key: key);
