@@ -1,16 +1,6 @@
-# designpart
-
-SliverAppBar example Api
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+#Design simple app UI
+<br>
+Made by lukieoo
+<br>
+<br>
+<a href="https://imgrpost.com/image/Eixj7"><img src="https://i.imgrpost.com/imgr/2020/05/23/Simulator-Screen-Shot---iPhone-SE-2nd-generation---2020-05-24-at-00.27.48.png" alt="Simulator-Screen-Shot---iPhone-SE-2nd-generation---2020-05-24-at-00.27.48.png" border="0" height="400"/></a>
